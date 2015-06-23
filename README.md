@@ -2,7 +2,8 @@
 
 Firmware library SparkFun's Photon Micro OLED Shield.
 
-### About
+About
+-------------------
 
 This is a firmware library for [SparkFun's Photon Micro OLED Shield](https://www.sparkfun.com/products/13628).
 
@@ -12,9 +13,15 @@ With a bit of extra setup, it'll also work with the [Micro OELD Breakout](https:
 
 You can use this library to draw pixels, lines, circles, squares, and text on the micro OLED's 64x48 display.
 
-### Example Usage
+Repository Contents
+-------------------
 
-#### Initialization and Setup
+* **/firmware** - Source files for the library (.cpp, .h).
+* **/firmware/examples** - Example sketches for the library (.cpp). Run these from the Particle IDE. 
+* **spark.json** - General library properties for the Particel library manager. 
+
+Example Usage
+-------------------
 
 Include the library, declare a MicroOLED object, and set the display up with these snippets of code:
 
@@ -50,3 +57,16 @@ Check out the example files in the [examples directory](https://github.com/spark
 
 * [Particle Photon](https://www.sparkfun.com/products/13345)
 * [SparkFun Photon Micro OLED Shield](https://www.sparkfun.com/products/13628)
+
+License Information
+-------------------
+
+This product is _**open source**_! 
+
+Please review the LICENSE.md file for license information. 
+
+If you have any questions or concerns on licensing, please contact techsupport@sparkfun.com.
+
+Distributed as-is; no warranty is given.
+
+- Your friends at SparkFun.
