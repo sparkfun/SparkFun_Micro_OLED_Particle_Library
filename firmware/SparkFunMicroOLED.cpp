@@ -15,9 +15,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "SparkFunMicroOLED.h"
-
-// Add header of the fonts here.  Remove as many as possible to conserve FLASH memory.
-#include "util/SparkFunMicroOLEDFonts.h"
+#include "SparkFunMicroOLEDFonts.h"
 
 // Change the total fonts included
 #define TOTALFONTS		7

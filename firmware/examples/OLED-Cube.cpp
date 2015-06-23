@@ -36,7 +36,7 @@
 
   Distributed as-is; no warranty is given.
 *******************************************************************************/
-#include "SparkFunMicroOLED.h"  // Include the SFE_MicroOLED library
+#include "SparkFunMicroOLED/SparkFunMicroOLED.h"  // Include the SFE_MicroOLED library
 #include "math.h"
 
 //////////////////////////
