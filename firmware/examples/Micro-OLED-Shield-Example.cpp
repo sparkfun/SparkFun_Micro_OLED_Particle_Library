@@ -17,7 +17,7 @@
     D1/MOSI ----------------- A5 (don't change)
     D0/SCK ------------------ A3 (don't change)
       D2
-      D/C ------------------- D4 (can be any digital pin)
+      D/C ------------------- D6 (can be any digital pin)
       RST ------------------- D7 (can be any digital pin)
       CS  ------------------- A2 (can be any digital pin)
 
@@ -32,18 +32,15 @@
 
   Distributed as-is; no warranty is given.
 *******************************************************************************/
-#include "SparkFunMicroOLED/SparkFunMicroOLED.h"  // Include the SFE_MicroOLED library
+#include "SparkFunMicroOLED/SparkFunMicroOLED.h"  // Include MicroOLED library
 #include "math.h"
 
 //////////////////////////////////
 // MicroOLED Object Declaration //
 //////////////////////////////////
-// Declare a MicroOLED object. The parameters include:
-// 1 - Mode: Should be either MODE_SPI or MODE_I2C
-// 2 - Reset pin: Any digital pin (D7 on Micro OLED Shield)
-// 3 - D/C pin: Any digital pin (SPI mode only) (D3 on Micro OLED Shield)
-// 4 - CS pin: Any digital pin (SPI mode only, 10 recommended) (A2 on Micro OLED Shield)
-MicroOLED oled(MODE_SPI, D7, D3, A2);
+// Declare a MicroOLED object. If no parameters are supplied, default pins are
+// used, which will work for the Photon Micro OLED Shield (RST=D7, DC=D6, CS=A2)
+MicroOLED oled;
 
 void setup()
 {

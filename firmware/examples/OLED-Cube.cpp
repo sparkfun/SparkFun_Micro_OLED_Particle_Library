@@ -21,7 +21,7 @@
     D1/MOSI ----------------- A5 (don't change)
     D0/SCK ------------------ A3 (don't change)
       D2
-      D/C ------------------- D4 (can be any digital pin)
+      D/C ------------------- D6 (can be any digital pin)
       RST ------------------- D7 (can be any digital pin)
       CS  ------------------- A2 (can be any digital pin)
 
@@ -36,14 +36,14 @@
 
   Distributed as-is; no warranty is given.
 *******************************************************************************/
-#include "SparkFunMicroOLED/SparkFunMicroOLED.h"  // Include the SFE_MicroOLED library
+#include "SparkFunMicroOLED/SparkFunMicroOLED.h"  // Include Micro OLED library
 #include "math.h"
 
 //////////////////////////
 // MicroOLED Definition //
 //////////////////////////
 #define PIN_RESET D7  // Connect RST to pin 7 (req. for SPI and I2C)
-#define PIN_DC    D3  // Connect DC to pin 3 (required for SPI)
+#define PIN_DC    D6  // Connect DC to pin 6 (required for SPI)
 #define PIN_CS    A2 // Connect CS to pin A2 (required for SPI)
 
 //////////////////////////////////

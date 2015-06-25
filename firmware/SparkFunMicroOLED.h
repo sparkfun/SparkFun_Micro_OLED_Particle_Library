@@ -27,9 +27,9 @@
 #define pgm_read_word(x) (*(x))
 #define pgm_read_float(x) (*(x))
 
-#define DC_DEFAULT		8
-#define RST_DEFAULT		7
-#define CS_DEFAULT		10
+#define DC_DEFAULT		D6
+#define RST_DEFAULT		D7
+#define CS_DEFAULT		A2
 #define MODE_DEFAULT	MODE_SPI
 
 #define I2C_ADDRESS_SA0_0 0b0111100
