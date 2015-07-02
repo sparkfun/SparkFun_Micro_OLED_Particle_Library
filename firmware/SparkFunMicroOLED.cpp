@@ -16,6 +16,7 @@
 */
 #include "SparkFunMicroOLED.h"
 #include "SparkFunMicroOLEDFonts.h"
+#include "math.h"
 
 // Change the total fonts included
 #define TOTALFONTS		7
