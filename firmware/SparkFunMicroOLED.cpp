@@ -125,15 +125,19 @@ void MicroOLED::begin() {
 	setDrawMode(NORM);
 	setCursor(0,0);
 
-	pinMode(dcPin, OUTPUT);
 	pinMode(rstPin, OUTPUT);
 
 	if (interface == MODE_SPI)
 	{
 		spiSetup();
+		pinMode(dcPin, OUTPUT);
 	}
 	else if (interface == MODE_I2C)
 	{
+		if (dcPin == 0)
+			dcPin = I2C_ADDRESS_SA0_0;
+		else
+			dcPin = I2C_ADDRESS_SA0_1;
 		i2cSetup();
 	}
 
@@ -204,8 +208,7 @@ void MicroOLED::command(uint8_t c) {
 	}
 	else if (interface == MODE_I2C)
 	{
-		digitalWrite(dcPin, LOW);	// DC pin LOW
-		i2cWrite(I2C_ADDRESS_SA0_1, I2C_COMMAND, c);
+		i2cWrite(dcPin, I2C_COMMAND, c);
 	}
 }
 
@@ -224,9 +227,7 @@ void MicroOLED::data(uint8_t c) {
 	}
 	else if (interface == MODE_I2C)
 	{
-
-		digitalWrite(dcPin, HIGH); // DC pin HIGH
-		i2cWrite(I2C_ADDRESS_SA0_1, I2C_DATA, c);
+		i2cWrite(dcPin, I2C_DATA, c);
 	}
 }
 
@@ -334,7 +335,7 @@ void MicroOLED::display(void) {
 
     Arduino's print overridden so that we can use uView.print().
 */
-size_t MicroOLED::write(uint8_t c) 
+size_t MicroOLED::write(uint8_t c)
 {
 	if (c == '\n') {
 		cursorY += fontHeight;
@@ -865,10 +866,8 @@ void MicroOLED::spiTransfer(uint8_t data)
 
 void MicroOLED::i2cSetup()
 {
+	Wire.setSpeed(CLOCK_SPEED_400KHZ);
 	Wire.begin();
-
-	// SCL frequency = (F_CPU) / (16 + 2(TWBR) * (prescalar))
-	//TWBR = ((F_CPU / I2C_FREQ) - 16) / 2;
 }
 
 void MicroOLED::i2cWrite(uint8_t address, uint8_t dc, uint8_t data)

@@ -7,7 +7,7 @@
   This sketch prints a friendly, recognizable logo on the OLED Shield, then
   goes on to demo the Micro OLED library's functionality drawing pixels,
   lines, shapes, and text.
-  
+
   Hardware Connections:
 	This sketch was written specifically for the Photon Micro OLED Shield,
 	which does all the wiring for you. If you have a Micro OLED breakout,
@@ -42,16 +42,18 @@
 //////////////////////////////////
 // Declare a MicroOLED object. If no parameters are supplied, default pins are
 // used, which will work for the Photon Micro OLED Shield (RST=D7, DC=D6, CS=A2)
-MicroOLED oled;
+//MicroOLED oled;
+//MicroOLED oled(MODE_I2C, D7, 0);    // Example I2C declaration RST=D7, DC=LOW (0)
+
+//SYSTEM_MODE(MANUAL);
 
 void setup()
 {
+  Serial.begin(9600);
   oled.begin();    // Initialize the OLED
   oled.clear(ALL); // Clear the display's internal memory
   oled.display();  // Display what's in the buffer (splashscreen)
   delay(1000);     // Delay 1000 ms
-  oled.clear(PAGE); // Clear the buffer.
-  
   randomSeed(analogRead(A0) + analogRead(A1));
 }
 
@@ -66,7 +68,7 @@ void loop()
 void pixelExample()
 {
   printTitle("Pixels", 1);
-  
+
   for (int i=0; i<512; i++)
   {
     oled.pixel(random(oled.getLCDWidth()), random(oled.getLCDHeight()));
@@ -80,16 +82,16 @@ void lineExample()
   int middleY = oled.getLCDHeight() / 2;
   int xEnd, yEnd;
   int lineWidth = min(middleX, middleY);
-  
+
   printTitle("Lines!", 1);
-  
+
   for (int i=0; i<3; i++)
   {
     for (int deg=0; deg<360; deg+=15)
     {
       xEnd = lineWidth * cos(deg * M_PI / 180.0);
       yEnd = lineWidth * sin(deg * M_PI / 180.0);
-      
+
       oled.line(middleX, middleY, middleX + xEnd, middleY + yEnd);
       oled.display();
       delay(10);
@@ -98,7 +100,7 @@ void lineExample()
     {
       xEnd = lineWidth * cos(deg * M_PI / 180.0);
       yEnd = lineWidth * sin(deg * M_PI / 180.0);
-      
+
       oled.line(middleX, middleY, middleX + xEnd, middleY + yEnd, BLACK, NORM);
       oled.display();
       delay(10);
@@ -109,7 +111,7 @@ void lineExample()
 void shapeExample()
 {
   printTitle("Shapes!", 0);
-  
+
   // Silly pong demo. It takes a lot of work to fake pong...
   int paddleW = 3;  // Paddle width
   int paddleH = 15;  // Paddle height
@@ -127,9 +129,9 @@ void shapeExample()
   int ballVelocityY = 1;  // Ball up/down velocity
   int paddle0Velocity = -1;  // Paddle 0 velocity
   int paddle1Velocity = 1;  // Paddle 1 velocity
-    
+
   //while(ball_X >= paddle0_X + paddleW - 1)
-  while ((ball_X - ball_rad > 1) && 
+  while ((ball_X - ball_rad > 1) &&
          (ball_X + ball_rad < oled.getLCDWidth() - 2))
   {
     // Increment ball's position
@@ -174,7 +176,7 @@ void shapeExample()
     {
       paddle1Velocity = -paddle1Velocity;
     }
-    
+
     // Draw the Pong Field
     oled.clear(PAGE);  // Clear the page
     // Draw an outline of the screen:
@@ -196,7 +198,7 @@ void shapeExample()
 void textExamples()
 {
   printTitle("Text!", 1);
-  
+
   // Demonstrate font 0. 5x8 font
   oled.clear(PAGE);     // Clear the screen
   oled.setFontType(0);  // Set font to type 0
@@ -221,7 +223,7 @@ void textExamples()
     }
   }
   delay(500);  // Wait 500ms before next example
-  
+
   // Demonstrate font 1. 8x16. Let's use the print function
   // to display every character defined in this font.
   oled.setFontType(1);  // Set font to type 1
@@ -251,8 +253,8 @@ void textExamples()
   oled.print("tuvwxyz{|}~");
   oled.display();
   delay(1000);
-  
-  // Demonstrate font 2. 10x16. Only numbers and '.' are defined. 
+
+  // Demonstrate font 2. 10x16. Only numbers and '.' are defined.
   // This font looks like 7-segment displays.
   // Lets use this big-ish font to display readings from the
   // analog pins.
@@ -277,7 +279,7 @@ void textExamples()
     oled.display();
     delay(100);
   }
-  
+
   // Demonstrate font 3. 12x48. Stopwatch demo.
   oled.setFontType(3);  // Use the biggest font
   int ms = 0;
@@ -288,7 +290,7 @@ void textExamples()
     oled.setCursor(0, 0); // Set cursor to top-left
     if (s < 10)
       oled.print("00");   // Print "00" if s is 1 digit
-    else if (s < 100)     
+    else if (s < 100)
       oled.print("0");    // Print "0" if s is 2 digits
     oled.print(s);        // Print s's value
     oled.print(":");      // Print ":"
@@ -311,7 +313,7 @@ void printTitle(String title, int font)
 {
   int middleX = oled.getLCDWidth() / 2;
   int middleY = oled.getLCDHeight() / 2;
-  
+
   oled.clear(PAGE);
   oled.setFontType(font);
   // Try to set the cursor in the middle of the screen
@@ -323,4 +325,3 @@ void printTitle(String title, int font)
   delay(1500);
   oled.clear(PAGE);
 }
-
