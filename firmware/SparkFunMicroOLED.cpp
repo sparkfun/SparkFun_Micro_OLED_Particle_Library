@@ -789,6 +789,16 @@ void  MicroOLED::drawChar(uint8_t x, uint8_t y, uint8_t c, uint8_t color, uint8_
 
 }
 
+/*
+Draw Bitmap image on screen. The array for the bitmap can be stored in the Arduino file, so user don't have to mess with the library files.
+To use, create uint8_t array that is 64x48 pixels (384 bytes). Then call .drawBitmap and pass it the array.
+*/
+void MicroOLED::drawBitmap(const uint8_t * bitArray)
+{
+  for (int i=0; i<(LCDWIDTH * LCDHEIGHT / 8); i++)
+    screenmemory[i] = bitArray[i];
+}
+
 /** \brief Stop scrolling.
 
     Stop the scrolling of graphics on the OLED.
