@@ -7,7 +7,7 @@ About
 
 This is a firmware library for [SparkFun's Photon Micro OLED Shield](https://www.sparkfun.com/products/13628).
 
-![Photon Micro OLED Shield](https://cdn.sparkfun.com//assets/parts/1/1/0/1/5/13628-01.jpg)
+![Photon Micro OLED Shield](https://cdn.sparkfun.com//assets/parts/1/1/0/1/5/13628-04a.jpg)
 
 
 With a bit of extra setup, it'll also work with the [Micro OELD Breakout](https://www.sparkfun.com/products/13003).
