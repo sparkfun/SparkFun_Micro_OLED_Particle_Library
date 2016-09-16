@@ -258,7 +258,7 @@ void MicroOLED::setColumnAddress(uint8_t add) {
 void MicroOLED::clear(uint8_t mode) {
 	//	uint8_t page=6, col=0x40;
 	if (mode == ALL) {
-		for (int i=0; i < 8; i++) {
+		for (int i=0; i < 8; ++i) {
 			setPageAddress(i);
 			setColumnAddress(0);
 			for (int j = 0; j < 0x80; j++) {
@@ -280,7 +280,7 @@ void MicroOLED::clear(uint8_t mode) {
 void MicroOLED::clear(uint8_t mode, uint8_t c) {
 	//uint8_t page=6, col=0x40;
 	if (mode == ALL) {
-		for (int i = 0; i< 8; i++) {
+		for (int i = 0; i< 8; ++i) {
 			setPageAddress(i);
 			setColumnAddress(0);
 			for (int j= 0; j < 0x80; j++) {
@@ -322,7 +322,7 @@ void MicroOLED::contrast(uint8_t contrast) {
 void MicroOLED::display(void) {
 	uint8_t i, j;
 
-	for (i=0; i < 6; i++) {
+	for (i=0; i < 6; ++i) {
 		setPageAddress(i);
 		setColumnAddress(0);
 		for (j = 0; j < 0x40; j++) {
@@ -516,7 +516,8 @@ void MicroOLED::rectFill(uint8_t x, uint8_t y, uint8_t width, uint8_t height) {
 */
 void MicroOLED::rectFill(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t color , uint8_t mode) {
 	// TODO - need to optimise the memory map draw so that this function will not call pixel one by one
-	for (int i = x; i < x + width; i++) {
+	const unsigned short until = x + width;
+	for (unsigned short i = x; i < until; ++i) {
 		lineV(i, y, height, color, mode);
 	}
 }
@@ -592,7 +593,8 @@ void MicroOLED::circleFill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color
 	// Temporary disable fill circle for XOR mode.
 	if (mode == XOR) return;
 
-	for (uint8_t i = y0 - radius; i <= y0 + radius; i++) {
+	const uint8_t until_a = y0 + radius;
+	for (uint8_t i = y0 - radius; i <= until_a; ++i) {
 		pixel(x0, i, color, mode);
 	}
 
@@ -606,11 +608,13 @@ void MicroOLED::circleFill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color
 		ddF_x += 2;
 		f += ddF_x;
 
-		for (uint8_t i = y0-y; i <= y0 + y; i++) {
+		const uint8_t until_b = y0 + y;
+		for (uint8_t i = y0-y; i <= until_b; ++i) {
 			pixel(x0 + x, i, color, mode);
 			pixel(x0 - x, i, color, mode);
 		}
-		for (uint8_t i = y0 - x; i <= y0 + x; i++) {
+		const uint8_t until_c = y0 + x;
+		for (uint8_t i = y0 - x; i <= until_c; ++i) {
 			pixel(x0 + y, i, color, mode);
 			pixel(x0 - y, i, color, mode);
 		}
@@ -744,7 +748,7 @@ void  MicroOLED::drawChar(const uint8_t x, const uint8_t y, const uint8_t c, con
 
 	// the following draw function can draw anywhere on the screen, but SLOW pixel by pixel draw
 	if (rowsToDraw == 1) {
-		for  (i = 0; i < fontWidth + 1; i++) {
+		for  (i = 0; i < fontWidth + 1; ++i) {
 			if (i == fontWidth) // this is done in a weird way because for 5x7 font, there is no margin, this code add a margin after col 5
 			temp=0;
 			else
@@ -773,7 +777,7 @@ void  MicroOLED::drawChar(const uint8_t x, const uint8_t y, const uint8_t c, con
 
 	// each row on LCD is 8 bit height (see datasheet for explanation)
 	for(row = 0; row < rowsToDraw; row++) {
-		for (i = 0; i < fontWidth; i++) {
+		for (i = 0; i < fontWidth; ++i) {
 			temp=pgm_read_byte(fontsPointer[fontType]+FONTHEADERSIZE + (charBitmapStartPosition + i + (row * fontMapWidth)));
 			for (j = 0; j < 8; j++) {			// 8 is the LCD's page height (see datasheet for explanation)
 				if (temp & 0x1) {
@@ -795,7 +799,7 @@ To use, create uint8_t array that is 64x48 pixels (384 bytes). Then call .drawBi
 */
 void MicroOLED::drawBitmap(const uint8_t * bitArray)
 {
-  for (int i=0; i<(LCDWIDTH * LCDHEIGHT / 8); i++)
+  for (int i=0; i<(LCDWIDTH * LCDHEIGHT / 8); ++i)
     screenmemory[i] = bitArray[i];
 }
 
