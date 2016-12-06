@@ -151,32 +151,32 @@ public:
 	void circle(uint8_t x, uint8_t y, uint8_t radius, uint8_t color, uint8_t mode);
 	void circleFill(uint8_t x0, uint8_t y0, uint8_t radius);
 	void circleFill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color, uint8_t mode);
-	void drawChar(uint8_t x, uint8_t y, uint8_t c);
-	void drawChar(uint8_t x, uint8_t y, uint8_t c, uint8_t color, uint8_t mode);
+	void drawChar(const uint8_t x, const uint8_t y, const uint8_t c);
+	void drawChar(const uint8_t x, const uint8_t y, const uint8_t c,const  uint8_t color, const uint8_t mode);
 	void drawBitmap(const uint8_t * bitArray);
 	
 	uint8_t getLCDWidth(void);
 	uint8_t getLCDHeight(void);
-	void setColor(uint8_t color);
-	void setDrawMode(uint8_t mode);
+	void setColor(const uint8_t color);
+	void setDrawMode(const uint8_t mode);
 
 	// Font functions
 	uint8_t getFontWidth(void);
 	uint8_t getFontHeight(void);
 	uint8_t getTotalFonts(void);
 	uint8_t getFontType(void);
-	uint8_t setFontType(uint8_t type);
+	uint8_t setFontType(const uint8_t type);
 	uint8_t getFontStartChar(void);
 	uint8_t getFontTotalChar(void);
 
 	// LCD Rotate Scroll functions
-	void scrollRight(uint8_t start, uint8_t stop);
+	void scrollRight(const uint8_t start, const uint8_t stop);
 	void scrollLeft(uint8_t start, uint8_t stop);
 	void scrollVertRight(uint8_t start, uint8_t stop);
 	void scrollVertLeft(uint8_t start, uint8_t stop);
 	void scrollStop(void);
-	void flipVertical(bool flip);
-	void flipHorizontal(bool flip);
+	void flipVertical(const bool flip);
+	void flipHorizontal(const bool flip);
 
 private:
 	uint8_t csPin, dcPin, rstPin;
