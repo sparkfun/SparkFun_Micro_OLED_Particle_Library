@@ -59,6 +59,10 @@ Check out the example files in the [examples directory](https://github.com/spark
 * [Particle Photon](https://www.sparkfun.com/products/13345)
 * [SparkFun Photon Micro OLED Shield](https://www.sparkfun.com/products/13628)
 
+### Generating Images
+
+* [LCD Assistant](http://en.radzio.dxp.pl/bitmap_converter/) - Useful tool for generating images 
+
 License Information
 -------------------
 
